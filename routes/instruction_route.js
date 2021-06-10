@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const instrucao = require('../services/intrution.js');
+const instrucao = require('../services/instruction.js');
 
 router.get('/', async function(req, res, next) {
     try {

@@ -27,7 +27,7 @@ app.get('/', (req, res) => {
 
 // chamar pela atividades {'/atividades'}
 app.use('/activities',activitiesRouter);
-app.use('/instrution', instructionRouter);
+app.use('/instructions', instructionRouter);
 app.use('/participant', participantRouter);
 app.use('/perfil', perfilRouter);
 app.use('/section', sectionRouter);

@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const material = require('../services/used_materail.js');
+const material = require('../services/used_material.js');
 
 router.get('/', async function(req, res, next) {
     try {
