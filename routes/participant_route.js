@@ -1,25 +1,17 @@
 const express = require('express');
 const router = express.Router();
-const participante = require('../services/activity.js');
+const participante = require('../services/participant.js');
 
-router.get('/', async function(req, res, next) {
+router.get('/:id/utilizador/:id_utilizador', async function(req, res, next) {
     try {
+      console.log(req.params)
       console.log("test 1: passed")
-      res.json(await participante.getMutiple());
+      res.json(await participante.getMutiple(req.params.id, req.params.id_utilizador));
       console.log("final test: passed")
     } catch (err) {
       console.error(`Error while getting getting participante `, err.message);
       next(err);
     }
-  });
-
-router.get('/:id /:id_utilizador', async function(req, res, next) {
-  try {
-    res.json(await participante.getById(req.params.id, req.params.id_utilizador));
-  } catch (err) {
-    console.error(`Error while getting participante `, err.message);
-    next(err);
-  }
   });
 
 router.post('/', async function(req, res, next){

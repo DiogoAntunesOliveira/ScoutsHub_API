@@ -45,8 +45,8 @@ async function create(perfilBody){
         'INSERT INTO Perfil (nome, dt_nasc, genero,\
             contacto, morada, codigo_postal, nin, total_atividades_part, id_equipa) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)', 
             [
-                perfilBody.nome, activityBody.dt_nasc, activityBody.genero, activityBody.contacto, activityBody.morada,
-                perfilBody.codigo_postal, activityBody.nin, activityBody.total_atividades_part, activityBody.id_equipa
+                perfilBody.nome, perfilBody.dt_nasc, perfilBody.genero, perfilBody.contacto, perfilBody.morada,
+                perfilBody.codigo_postal, perfilBody.nin, perfilBody.total_atividades_part, perfilBody.id_equipa
             ],
     )
 

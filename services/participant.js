@@ -7,27 +7,15 @@ const config = require('../config');
 */
 
 
-async function getMutiple(id){
+async function getMutiple(id, id_utilizador){
 
     console.log("test 2: passed")
     //console.log(dbConnection.query('select * from Participante'))
+    console.log(id, id_utilizador)
 
     // Realizar query para slecionar todos os elementos na Participante
-    const participante = await dbConnection.query('SELECT * FROM Participante WHERE id_atividade = ?', [id]);
-    console.log("test 3: passed")
-
-    return {
-        participante
-    }
-}
-
-async function getById(id, id_utilizador){
-
-    console.log("test 2: passed")
-    //console.log(dbConnection.query('select * from Participante'))
-    
-    // Selecionar os elementos da tabela Participante por ID
-    const participante = await dbConnection.query('SELECT * FROM Participante WHERE id_atividade = ? AND id_utilizador = ?', [id, id_utilizador]);
+    const participante = await dbConnection.query('SELECT * FROM Participante p\
+    WHERE p.id_atividade = ? AND p.id_utilizador = ?', [id, id_utilizador]);
     console.log("test 3: passed")
 
     return {
@@ -109,7 +97,6 @@ async function remove(id, id_utilizador){
 
 module.exports = {
     getMutiple,
-    getById,
     create,
     update,
     remove
