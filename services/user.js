@@ -42,10 +42,9 @@ async function create(userBody){
     // Criar novo elemento para a tabela utilizador
     // nesta tabela o id e automaticamente incrementado
     const result = await dbConnection.query(
-        'INSERT INTO Utilizador (email_utilizador, palavra_pass, id_tipo,\
-            id_perfil) VALUES (?, ?, ?, ?)', 
+        'INSERT INTO Utilizador (email_utilizador, palavra_pass, id_tipo) VALUES (?, ?, ?)', 
             [
-                userBody.email_utilizador, userBody.palavra_pass, userBody.id_tipo, userBody.id_perfil
+                userBody.email_utilizador, userBody.palavra_pass, userBody.id_tipo
             ],
     )
 
@@ -70,11 +69,10 @@ async function update(id, userBody){
 
     // Realizar a atualizacao de um elemento na tabela utilizador
     const result = await dbConnection.query(
-        'UPDATE Utilizador SET email_utilizador = ?, palavra_pass = ?, id_tipo = ?,\
-         id_perfil = ?\
+        'UPDATE Utilizador SET email_utilizador = ?, palavra_pass = ?, id_tipo = ?\
           WHERE id_utilizador = ?', 
          [
-             userBody.email_utilizador, userBody.palavra_pass, userBody.id_tipo, userBody.id_perfil,
+             userBody.email_utilizador, userBody.palavra_pass, userBody.id_tipo,
              id
          ]
     )

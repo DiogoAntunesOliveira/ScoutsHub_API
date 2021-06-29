@@ -4,7 +4,7 @@ const env = process.env
 
 const config = {
     db:{
-        host: 'localhost',
+        host: 'mysql',
         user: 'root',
         password: 'root',
         database: 'scoutshub'

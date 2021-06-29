@@ -13,19 +13,22 @@ router.get('/', async function(req, res, next) {
     }
   });
 
-router.get('/:id', async function(req, res, next) {
+router.get('/user/:id_user', async function(req, res, next) {
   try {
-    res.json(await perfis.getById(req.params.id));
+    res.json(await perfis.getById(req.params.id_user));
   } catch (err) {
     console.error(`Error while getting perfil `, err.message);
     next(err);
   }
   });
 
-router.post('/', async function(req, res, next){
+  //  multer(multerConfig).single('file') -> Upload de um so arquivo
+  //  multer(multerConfig).array -> Upload de varios ao mesmo tempo
+router.post('/user/:id_user', async function(req, res, next){
   try{
+    console.log(req.file);
     console.log("test 1: passed")
-    res.json(await perfis.create(req.body));
+    res.json(await perfis.create(req.params.id_user, req.body));
     console.log("final test: passed")
   }catch(err){
     console.error(`Error while creating perfil `, err.message);
@@ -33,10 +36,10 @@ router.post('/', async function(req, res, next){
   } 
 })
 
-router.put('/:id', async function(req, res, next) {
+router.put('/user/:id_user', async function(req, res, next) {
   try {
     console.log(req.params.id)
-    res.json(await perfis.update(req.params.id, req.body));
+    res.json(await perfis.update(req.params.id_user, req.body));
   } catch (err) {
     console.error(`Error while updating programming language`, err.message);
     next(err);

@@ -22,10 +22,10 @@ router.get('/:id', async function(req, res, next) {
   }
   });
 
-router.post('/', async function(req, res, next){
+router.post('/:id/perfil/:id_perfil', async function(req, res, next){
   try{
     console.log("test 1: passed")
-    res.json(await user.create(req.body));
+    res.json(await user.create(req.body, req.params.id, req.params.id_perfil));
     console.log("final test: passed")
   }catch(err){
     console.error(`Error while creating user `, err.message);

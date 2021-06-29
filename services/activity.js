@@ -42,11 +42,11 @@ async function create(activityBody){
     // Criar novo elemento para a tabela atividade
     // nesta tabela o id e automaticamente incrementado
     const result = await dbConnection.query(
-        'INSERT INTO Atividade (nome, tipo, descricao,\
-            custo, local, local_inicio, local_fim, coordenadas, url_local, data_inicio, data_fim) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', 
+        'INSERT INTO Atividade (nome, tipo, imagem, descricao,\
+            custo, local, local_inicio, local_fim, latitude, longitude, data_inicio, data_fim) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', 
             [
-                activityBody.nome, activityBody.tipo, activityBody.descricao, activityBody.custo, activityBody.local,
-                activityBody.local_inicio, activityBody.local_fim, activityBody.coordenadas, activityBody.url_local, activityBody.data_inicio,
+                activityBody.nome, activityBody.tipo, activityBody.imagem, activityBody.descricao, activityBody.custo, activityBody.local,
+                activityBody.local_inicio, activityBody.local_fim, activityBody.latitude, activityBody.longitude, activityBody.data_inicio,
                 activityBody.data_fim
             ],
     )
@@ -72,12 +72,12 @@ async function update(id, activityBody){
 
     // Realizar a atualizacao de um elemento na tabela atividade
     const result = await dbConnection.query(
-        'UPDATE Atividade SET nome = ?, tipo = ?, descricao = ?,\
-         custo = ?, local = ?, local_inicio = ?, local_fim = ?, coordenadas = ?, url_local = ?, data_inicio = ?, data_fim = ?\
+        'UPDATE Atividade SET nome = ?, tipo = ?, imagem = ?, descricao = ?,\
+         custo = ?, local = ?, local_inicio = ?, local_fim = ?, latitude = ?, longitude = ?, data_inicio = ?, data_fim = ?\
           WHERE id_atividade = ?', 
          [
-             activityBody.nome, activityBody.tipo, activityBody.descricao, activityBody.custo, activityBody.local,
-             activityBody.local_inicio, activityBody.local_fim, activityBody.coordenadas, activityBody.url_local, activityBody.data_inicio, activityBody.data_fim,
+             activityBody.nome, activityBody.tipo, activityBody.imagem, activityBody.descricao, activityBody.custo, activityBody.local,
+             activityBody.local_inicio, activityBody.local_fim, activityBody.latitude, activityBody.longitude, activityBody.data_inicio, activityBody.data_fim,
              id
          ]
     )

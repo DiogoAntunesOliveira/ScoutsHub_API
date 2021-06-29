@@ -23,16 +23,42 @@ async function getMutiple(id, id_utilizador){
     }
 }
 
-async function create(participanteBody){
-    console.log(participanteBody.id)
-    console.log(participanteBody)
+async function getMutipleByActivity(id, id_utilizador){
+
+    console.log("test 2: passed")
+    //console.log(dbConnection.query('select * from Participante'))
+    console.log(id, id_utilizador)
+
+    // Realizar query para slecionar todos os elementos na Participante
+    const participante = await dbConnection.query('SELECT * FROM Participante p\
+    WHERE p.id_atividade = ? ', [id]);
+    console.log("test 3: passed")
+
+    return {
+        participante
+    }
+}
+
+async function getMutipleByUser(id_utilizador){
+
+    // Realizar query para slecionar todos os elementos na Participante
+    const participante = await dbConnection.query('SELECT * FROM Participante p\
+    WHERE p.id_utilizador = ? ', [id_utilizador]);
+    console.log("test 3: passed")
+
+    return {
+        participante
+    }
+}
+
+async function create(id, id_utilizador, participanteBody){
 
     // Criar novo elemento para a tabela Participante
     // nesta tabela o id e automaticamente incrementado
     const result = await dbConnection.query(
-        'INSERT INTO Participante (confirmacao) VALUES (?)', 
+        'INSERT INTO Participante (confirmacao, id_utilizador, id_atividade) VALUES (?, ?, ?)', 
             [
-                participanteBody.confirmacao
+                participanteBody.confirmacao, id_utilizador, id
             ],
     )
 
@@ -57,7 +83,7 @@ async function update(id, id_utilizador, participanteBody){
 
     // Realizar a atualizacao de um elemento na tabela Participante
     const result = await dbConnection.query(
-        'UPDATE Participante SET confimacao = ?\
+        'UPDATE Participante SET confirmacao = ?\
           WHERE id_atividade = ? AND id_utilizador = ?', 
          [
              participanteBody.confirmacao, 
@@ -97,6 +123,8 @@ async function remove(id, id_utilizador){
 
 module.exports = {
     getMutiple,
+    getMutipleByActivity,
+    getMutipleByUser,
     create,
     update,
     remove

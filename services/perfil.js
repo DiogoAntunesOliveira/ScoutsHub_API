@@ -21,13 +21,13 @@ async function getMutiple(){
     }
 }
 
-async function getById(id){
+async function getById(id_user){
 
     console.log("test 2: passed")
     //console.log(dbConnection.query('select * from perfil'))
     
     // Selecionar os elementos da tabela perfil por ID
-    const perfis = await dbConnection.query('SELECT * FROM Perfil WHERE id_perfil = ?', [id]);
+    const perfis = await dbConnection.query('SELECT * FROM Perfil WHERE id_utilizador = ?', [id_user]);
     console.log("test 3: passed")
 
     return {
@@ -35,18 +35,18 @@ async function getById(id){
     }
 }
 
-async function create(perfilBody){
+async function create(id_user ,perfilBody){
     console.log(perfilBody.id)
     console.log(perfilBody)
 
     // Criar novo elemento para a tabela perfil
     // nesta tabela o id e automaticamente incrementado
     const result = await dbConnection.query(
-        'INSERT INTO Perfil (nome, dt_nasc, genero,\
-            contacto, morada, codigo_postal, nin, total_atividades_part, id_equipa) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)', 
+        'INSERT INTO Perfil (nome, imagem, dt_nasc, genero,\
+            contacto, morada, codigo_postal, nin, total_atividades_part, id_equipa, id_utilizador) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)', 
             [
-                perfilBody.nome, perfilBody.dt_nasc, perfilBody.genero, perfilBody.contacto, perfilBody.morada,
-                perfilBody.codigo_postal, perfilBody.nin, perfilBody.total_atividades_part, perfilBody.id_equipa
+                perfilBody.nome, perfilBody.imagem, perfilBody.dt_nasc, perfilBody.genero, perfilBody.contacto, perfilBody.morada,
+                perfilBody.codigo_postal, perfilBody.nin, perfilBody.total_atividades_part, perfilBody.id_equipa, id_user
             ],
     )
 
@@ -67,17 +67,17 @@ async function create(perfilBody){
     id por argumento -> <req.params.id> 
     activity body -> <req.body> 
  */
-async function update(id, perfilBody){
+async function update(id_user, perfilBody){
 
     // Realizar a atualizacao de um elemento na tabela perfil
     const result = await dbConnection.query(
-        'UPDATE Perfil SET nome = ?, dt_nasc = ?, genero = ?,\
-         contacto = ?, morada = ?, codigo_postal = ?, nin = ?, total_atividades_part = ?, id_equipa = ?\
-          WHERE id_perfil = ?', 
+        'UPDATE Perfil SET nome = ?, imagem = ?, dt_nasc = ?, genero = ?,\
+         contacto = ?, morada = ?, codigo_postal = ?, nin = ?, total_atividades_part = ?, id_equipa = ?, id_utilizador = ?\
+          WHERE id_utilizador = ?',
          [
-            perfilBody.nome, perfilBody.dt_nasc, perfilBody.genero, perfilBody.contacto, perfilBody.morada,
-            perfilBody.codigo_postal, perfilBody.nin, perfilBody.total_atividades_part, perfilBody.id_equipa,
-             id
+            perfilBody.nome, perfilBody.imagem, perfilBody.dt_nasc, perfilBody.genero, perfilBody.contacto, perfilBody.morada,
+            perfilBody.codigo_postal, perfilBody.nin, perfilBody.total_atividades_part, perfilBody.id_equipa, perfilBody.id_utilizador,
+             id_user
          ]
     )
     let message = 'Error updating Perfil'
